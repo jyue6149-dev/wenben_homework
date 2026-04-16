@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CMF 团队网站</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <p class="eyebrow">中国宏观经济论坛 CMF</p>
+      <h1>领导团队与论坛主要成员</h1>
+      <p class="lead">
+        以姓名、头衔与研究领域为核心，快速浏览 CMF 团队结构与学术方向。
+      </p>
+      <div class="stats">
+        <div class="stat-card">
+          <span class="stat-label">领导团队</span>
+          <strong>4</strong>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">主要成员</span>
+          <strong>51</strong>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">研究方向</span>
+          <strong>55</strong>
+        </div>
+      </div>
+    </header>
+
+    <section class="toolbar">
+      <div class="filters" id="filters">
+        <button class="filter is-active" data-filter="全部">全部</button>
+        <button class="filter" data-filter="领导团队">领导团队</button>
+        <button class="filter" data-filter="论坛主要成员">论坛主要成员</button>
+      </div>
+      <label class="search-box">
+        <span>搜索</span>
+        <input id="searchInput" type="search" placeholder="按姓名、头衔或研究领域检索">
+      </label>
+    </section>
+
+    <section class="cards" id="cards"></section>
+  </div>
+
+  <script>
+    const members = [{"类别": "论坛主要成员", "姓名": "丁守海", "头衔": "中国人民大学应用经济学院教授；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/dc9679a5bdcf4a74bfb6edbb6ee9768f.htm", "研究领域": "劳动经济学"}, {"类别": "论坛主要成员", "姓名": "丰雷", "头衔": "中国人民大学公共管理学院土地管理系教授；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/baf3bb0e95e741119397208f0896c969.htm", "研究领域": "不动产经济、统计和计量分析方法应用、土地制度和土地政策分析"}, {"类别": "论坛主要成员", "姓名": "于春海", "头衔": "中国人民大学经济学院执行院长；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/796de06476c841ffa5c2e57e1926394a.htm", "研究领域": "全球经济失衡与调整、金融创新对金融市场稳定机制的影响、异质企业贸易理论、增加值贸易"}, {"类别": "论坛主要成员", "姓名": "于泽", "头衔": "中国人民大学经济学副院长；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/f554e1094d85437aa09370bde5d0e86e.htm", "研究领域": "货币理论与政策、商业银行行为"}, {"类别": "论坛主要成员", "姓名": "代志新", "头衔": "中国人民大学财政金融学院教授；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/5493bef8497944deb23c7d2e58c0768c.htm", "研究领域": "行为财政学、实验经济学、行为经济学"}, {"类别": "论坛主要成员", "姓名": "何青", "头衔": "中国人民大学财政金融学院教授；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/06df359161dd4e7a9d296dce1acb8aa3.htm", "研究领域": "金融发展、金融政策、国际金融"}, {"类别": "论坛主要成员", "姓名": "冯俊新", "头衔": "中国人民大学经济学院副教授；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/2e5a469e7b764efc82a3b19f45a84504.htm", "研究领域": "国际经济学、城市及区域经济学"}, {"类别": "论坛主要成员", "姓名": "刁大明", "头衔": "中国人民大学国际关系学院教授；国家发展与战略研究院副院长；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/8b9f45a5016645b8b924bc64fc6b3e5b.htm", "研究领域": "美国政治与外交、中美关系"}, {"类别": "论坛主要成员", "姓名": "刘凤良", "头衔": "中国人民大学经济学院教授；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/7a10a6593e7546f8ad6f5f7ee83b5903.htm", "研究领域": "经济增长理论、行为宏观经济学"}, {"类别": "论坛主要成员", "姓名": "刘凯", "头衔": "中国人民大学经济学院教授；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/d0b33c20ae2c4c5780c57f86705b4b70.htm", "研究领域": "宏观经济学、世界经济、比较制度视野下的中国宏观经济、中国特色绿色发展理论与实践"}, {"类别": "论坛主要成员", "姓名": "刘小鲁", "头衔": "中国人民大学经济学院教授；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/529d8e9b3d8143edae93d680547cd633.htm", "研究领域": "产业组织理论、平台经济、数字经济、数据要素市场"}, {"类别": "论坛主要成员", "姓名": "刘晓光", "头衔": "中国人民大学国家发展与战略研究院副院长；中国人民大学吴玉章讲席教授；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/08c233029b8142299a26cdd02608948c.htm", "研究领域": "宏观金融"}, {"类别": "论坛主要成员", "姓名": "刘瑞明", "头衔": "中国人民大学国家发展与战略研究院教授；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/d1a00ea6010c4366a691b209876fac28.htm", "研究领域": "转型经济学、发展经济学、产业经济学"}, {"类别": "论坛主要成员", "姓名": "刘青", "头衔": "中国人民大学国家发展与战略研究院执行院长；中国人民大学吴玉章讲席教授；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/f021d0c7cfe34690990a2e7f21ef2455.htm", "研究领域": "世界经济、国际贸易与投资、中国经济发展、全球化与创新、数字经济"}, {"类别": "论坛主要成员", "姓名": "吕冰洋", "头衔": "中国人民大学财政金融学院教授；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/fbe4e44e197c49b6bbbddfe2c43727d7.htm", "研究领域": "财税理论与政策、现代财政制度构建、中国经济发展、文化与经济"}, {"类别": "论坛主要成员", "姓名": "周业安", "头衔": "中国人民大学经济学院教授；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/9bdfeeaf2324425aabbae7f980f62b08.htm", "研究领域": "行为和实验经济学、公共经济学以及公司金融"}, {"类别": "论坛主要成员", "姓名": "唐钧", "头衔": "中国人民大学公共治理研究院副院长、公共管理学院教授；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/738ebc494e5143c6ba997782759f0d85.htm", "研究领域": "应急管理和舆情应对、风险治理与危机公关、政府改革与社会治理前沿"}, {"类别": "论坛主要成员", "姓名": "孙文凯", "头衔": "中国人民大学经济学院教授；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/8ee0df8aa0f34a0ba5f8bd0852a4914d.htm", "研究领域": "劳动经济学、发展经济学、中小企业发展"}, {"类别": "论坛主要成员", "姓名": "宋枫", "头衔": "中国人民大学应用经济学院教授；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/1b5570a0e7c846fca5b130341e2a9cf6.htm", "研究领域": "能源经济与政策"}, {"类别": "论坛主要成员", "姓名": "尹恒", "头衔": "中国人民大学国家发展与战略研究院教授；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/0760f35ed2b5491abee023aee307dc00.htm", "研究领域": "财政、产业组织"}, {"类别": "论坛主要成员", "姓名": "张成思", "头衔": "中国人民大学财政金融学院副院长、教授；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/f86608b2ccda4f0ab8ce90fd3d2f7038.htm", "研究领域": "货币金融"}, {"类别": "论坛主要成员", "姓名": "张杰", "头衔": "中国人民大学财政金融学院教授；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/400fc111ded840b586eb08e0063d0d3c.htm", "研究领域": "制度金融学、中国金融制度与金融发展"}, {"类别": "论坛主要成员", "姓名": "易定红", "头衔": "中国人民大学劳动人事学院教授；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/f68483a695854e9e81c7e7e6b750289a.htm", "研究领域": "劳动经济理论，中国劳动市场改革，就业与收入分配，工会经济学等"}, {"类别": "论坛主要成员", "姓名": "李三希", "头衔": "中国人民大学经济学院副院长、数字经济研究中心主任；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/cee2fbff2125420f9a85691c6d79cd72.htm", "研究领域": "信息经济学、产业组织理论、数字经济"}, {"类别": "论坛主要成员", "姓名": "李勇", "头衔": "中国人民大学经济学院教授；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/cbb7bfec3e064d209a306aafc9b54719.htm", "研究领域": "贝叶斯计量经济学、资产管理、量化投资"}, {"类别": "论坛主要成员", "姓名": "李黎力", "头衔": "中国人民大学经济学院副教授；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/034d3d247c4541888e869db6e8727b60.htm", "研究领域": "经济思想史与经济学流派、货币和金融思想史"}, {"类别": "论坛主要成员", "姓名": "杨其静", "头衔": "中国人民大学经济学院教授；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/28e5337b25df46958ae560a44450e9b8.htm", "研究领域": "组织经济学（企业理论、公司金融与治理、新政治经济学）"}, {"类别": "论坛主要成员", "姓名": "杨继东", "头衔": "中国人民大学国有经济研究院副院长、经济学院教授；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/0290ef76d176401386db42293cd42833.htm", "研究领域": "企业理论、制度经济学、产业政策和企业数字化转型"}, {"类别": "论坛主要成员", "姓名": "林晨", "头衔": "中国人民大学研究生院常务副院长、应用经济学院教授；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/a008fa56eb0546a99377c1e2a99569ee.htm", "研究领域": "国民经济学、投入产出经济学"}, {"类别": "论坛主要成员", "姓名": "汪三贵", "头衔": "中国人民大学农业与农村发展学院教授；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/a943ebfe781749819fc7100671553aca.htm", "研究领域": "贫困问题、发展金融、农村发展"}, {"类别": "论坛主要成员", "姓名": "王孝松", "头衔": "中国人民大学经济学院教授；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/d819ffd15b174c789f5062ed65ca7228.htm", "研究领域": "国际贸易理论、国际贸易政策的理论与经验研究、国际政治经济学"}, {"类别": "论坛主要成员", "姓名": "王晋斌", "头衔": "中国人民大学经济学院原常务副书记；国家发展与战略研究院研究员；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/f16cbf3b187048088723cd9f447cbded.htm", "研究领域": "资本市场和开放宏观经济学"}, {"类别": "论坛主要成员", "姓名": "秦聪", "头衔": "中国人民大学国家发展与战略研究院副教授；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/d0005dcd270f4cff819bf8d1a0faee5c.htm", "研究领域": "财政学、发展经济学"}, {"类别": "论坛主要成员", "姓名": "秦虹", "头衔": "中国人民大学国家发展与战略研究院高级研究员；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/780161db382e4f5697bda2cd8f5e8322.htm", "研究领域": "住房与房地产理论与政策、城市更新理论与实践"}, {"类别": "论坛主要成员", "姓名": "程国强", "头衔": "中国人民大学农业与农村发展学院教授；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/5d5ffa1b3a1540aba70606c225fca06e.htm", "研究领域": "粮食安全战略、农业农村政策、乡村振兴理论与政策、国际农业贸易治理、WTO"}, {"类别": "论坛主要成员", "姓名": "罗来军", "头衔": "中国人民大学经济学院教授；国家发展与战略研究院研究员；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/9ec250634e9940dcab3951afa1ab314a.htm", "研究领域": "国际经济学"}, {"类别": "论坛主要成员", "姓名": "聂辉华", "头衔": "中国人民大学经济学院教授；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/c08e643175eb4974a402e359bca85931.htm", "研究领域": "政企关系、企业理论、制度经济学"}, {"类别": "论坛主要成员", "姓名": "范志勇", "头衔": "中国人民大学经济学院党委副书记、教授；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/ca342bf016fc4fa398cff79d538bd005.htm", "研究领域": "开放宏观经济学、宏观经济学、国际经济学"}, {"类别": "论坛主要成员", "姓名": "袁海霞", "头衔": "中国宏观经济论坛（CMF）主要成员；中诚信国际研究院院长", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/b01e866984ca49449972ec420f455a13.htm", "研究领域": "宏观经济、地方债务与城投行业、信用风险、评级行业与债券市场等"}, {"类别": "论坛主要成员", "姓名": "贾俊雪", "头衔": "中国人民大学发展规划处处长、财政金融学院教授；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/ee427597c4c54ff18a57d5f49a3bb95b.htm", "研究领域": "财政理论与政策、宏观经济理论与政策"}, {"类别": "论坛主要成员", "姓名": "赵勇", "头衔": "中国人民大学经济学院教授；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/ec6edc465d254acfb12893dec94a77fc.htm", "研究领域": "国际经济学、金融发展理论"}, {"类别": "论坛主要成员", "姓名": "赵忠", "头衔": "中国人民大学劳动人事学院院长、教授；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/580f8a7333c5441f815e40acd425f9e6.htm", "研究领域": "劳动力市场政策、人工智能、城乡移民、收入分配、社会保障、医疗与健康、微观计量经济学等"}, {"类别": "论坛主要成员", "姓名": "邹静娴", "头衔": "中国人民大学国家发展与战略研究院副教授；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/be4ba30186ac4153a37f5da213c3237d.htm", "研究领域": "国际经济学、发展经济学。"}, {"类别": "论坛主要成员", "姓名": "郑新业", "头衔": "中国人民大学党委常委、副校长", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/6292501542934c4db150fcabc714bb89.htm", "研究领域": "能源和碳经济、产业与数字经济、全球化与全球政策协同"}, {"类别": "论坛主要成员", "姓名": "郭杰", "头衔": "中国人民大学经济学院教授；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/6a871c048ec4427a9156e7d05a26d8ca.htm", "研究领域": "宏观经济理论与政策"}, {"类别": "论坛主要成员", "姓名": "钱宗鑫", "头衔": "中国人民大学财政金融学院副院长、教授；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/79c41fd155ff4010b469a1845e957c82.htm", "研究领域": "宏观金融、国际金融、资产定价"}, {"类别": "论坛主要成员", "姓名": "陈占明", "头衔": "中国人民大学应用经济学院副院长、教授；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/46f88f626bd34156905bb11af728edd2.htm", "研究领域": "投入产出分析、能源经济与政策、跨境直接投资"}, {"类别": "论坛主要成员", "姓名": "陈彦斌", "头衔": "中国社科院工业经济研究所党委书记兼所长；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/11da6db07c9e4110acef427db687b7ef.htm", "研究领域": "宏观经济学"}, {"类别": "论坛主要成员", "姓名": "雷达", "头衔": "中国人民大学经济学院教授；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/8a12d9f9eeb44b35899933790d818033.htm", "研究领域": "世界经济学、国际投资与国际金融、国际政治经济学"}, {"类别": "论坛主要成员", "姓名": "马勇", "头衔": "中国人民大学财政金融学院教授；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/7ab3a56e612045e0b76d3c53172fdaa6.htm", "研究领域": "宏观金融理论与政策、 DSGE金融建模与应用、社会科学中的实证方法与应用"}, {"类别": "论坛主要成员", "姓名": "黄石松", "头衔": "中国人民大学国家发展与战略研究院高级研究员；中国宏观经济论坛（CMF）主要成员", "详情页": "http://ier.ruc.edu.cn/lttd/ltzycy/2c1539f9f675450d8597b229e8213b95.htm", "研究领域": "老龄政策与法律、银发经济、老龄健康"}, {"类别": "领导团队", "姓名": "刘元春", "头衔": "上海财经大学校长；中国人民大学原副校长；中国宏观经济论坛（CMF）联合创始人", "详情页": "http://ier.ruc.edu.cn/lttd/ldtd/301284131ffa43e58ea50861ddfe6924.htm", "研究领域": "开放宏观经济学、货币政策与通货膨胀、中国经济增长"}, {"类别": "领导团队", "姓名": "杨瑞龙", "头衔": "中国人民大学国家一级教授；中国人民大学经济研究所联席所长；中国宏观经济论坛（CMF）联合创始人、联席主席", "详情页": "http://ier.ruc.edu.cn/lttd/ldtd/58248c9405f04035a592a873e4730117.htm", "研究领域": "社会主义经济理论、制度经济学、企业理论、非均衡经济学"}, {"类别": "领导团队", "姓名": "毛振华", "头衔": "中国人民大学经济研究所联席所长、教授；中国宏观经济论坛（CMF）联合创始人、联席主席；中诚信国际首席经济学家", "详情页": "http://ier.ruc.edu.cn/lttd/ldtd/71432773e057470fa8802b15d810e8c4.htm", "研究领域": "宏观经济、资本市场、信用评级"}, {"类别": "领导团队", "姓名": "闫衍", "头衔": "中国人民大学经济研究所副所长；中国宏观经济论坛（CMF）副主席；中诚信国际信用评级有限责任公司董事长", "详情页": "http://ier.ruc.edu.cn/lttd/ldtd/17b832488a094a70917bc8eb1cd55a8b.htm", "研究领域": "宏观经济、债券市场与信用评级"}];
+    const cards = document.getElementById('cards');
+    const filters = document.getElementById('filters');
+    const searchInput = document.getElementById('searchInput');
+    let currentFilter = '全部';
+
+    function render() {
+      const keyword = searchInput.value.trim().toLowerCase();
+      const filtered = members.filter((member) => {
+        const matchesFilter = currentFilter === '全部' || member['类别'] === currentFilter;
+        const haystack = [member['姓名'], member['头衔'], member['研究领域']]
+          .join(' ')
+          .toLowerCase();
+        const matchesKeyword = !keyword || haystack.includes(keyword);
+        return matchesFilter && matchesKeyword;
+      });
+
+      cards.innerHTML = filtered.map((member) => `
+        <article class="card">
+          <div class="card-top">
+            <span class="badge">${member['类别']}</span>
+            <h2>${member['姓名']}</h2>
+          </div>
+          <p class="title">${member['头衔'] || '暂无头衔信息'}</p>
+          <div class="research">
+            <span class="label">研究领域</span>
+            <p>${member['研究领域'] || '页面未明确标注'}</p>
+          </div>
+          <a class="detail-link" href="${member['详情页']}" target="_blank" rel="noreferrer">查看来源页面</a>
+        </article>
+      `).join('');
+
+      if (!filtered.length) {
+        cards.innerHTML = `
+          <div class="empty-state">
+            <h2>没有匹配结果</h2>
+            <p>可以试试切换分组或缩短搜索词。</p>
+          </div>
+        `;
+      }
+    }
+
+    filters.addEventListener('click', (event) => {
+      const button = event.target.closest('button[data-filter]');
+      if (!button) return;
+      currentFilter = button.dataset.filter;
+      document.querySelectorAll('.filter').forEach((item) => item.classList.remove('is-active'));
+      button.classList.add('is-active');
+      render();
+    });
+
+    searchInput.addEventListener('input', render);
+    render();
+  </script>
+</body>
+</html>
